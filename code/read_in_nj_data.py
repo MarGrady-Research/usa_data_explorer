@@ -57,3 +57,9 @@ df.drop(columns=cols_to_drop, inplace=True)
 
 # Save as CSV for future use
 df.to_csv("nj_data_2015_2025.csv", index=False)
+
+
+# Next steps: 
+## Read in another state
+## Percentile calculations by district, ignoring charters
+## Then consider how to incorporate / group charters
