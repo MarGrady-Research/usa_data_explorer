@@ -84,7 +84,3 @@ if all_dataframes:
 else:
     print("No data was collected. Files were not saved.")
 
-
-# Next steps
-# then rename this file and run through all states and years I initially want to use
-# create a new script to work through percentile calculation
