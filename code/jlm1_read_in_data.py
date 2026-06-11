@@ -10,8 +10,8 @@ import time
 API_URL = "https://zelma.ai/api/data/3.0"
 
 # Set states and years to loop through
-STATES = ["NJ", "NY"]
-YEARS = range(2015, 2026)
+STATES = ["NJ", "NY", "MI", "MA"]
+YEARS = range(2024, 2026)
 MAX_RETRIES = 3 # number of times to retry on a timeout
 
 all_dataframes = []
@@ -68,18 +68,23 @@ for state in STATES:
 
 print("\n Combining all datasets")
 
+# ADJUSTED CODE BELOW TO MENTION THE PARQUET FILE. WILL NEED TO QA LATER.
+# ALSO, NEED TO ADJUST TO SAVE TO THE DATA FOLDER. I DON'T THINK THAT HAPPENS NOW.
+
 if all_dataframes: 
 
     # concatenate list of dataframes into one large dataframe
     master_df = pd.concat(all_dataframes, ignore_index=True)
 
     # save out to CSV file
-    master_filename = "all_states.csv"
-    master_df.to_csv(master_filename, index = False)
-    print(f"Success! Saved {len(master_df)} rows to '{master_filename}'")
+    csv_filename = "data/all_states.csv"
+    master_df.to_csv(csv_filename, index = False)
+    print(f"Success! Saved {len(master_df)} rows to {csv_filename}")
 
     # save out to parquet file
-    master_df.to_parquet('all_states.parquet', engine = 'pyarrow')
+    parquet_filename = "data/all_states.parquet"
+    master_df.to_parquet(parquet_filename, engine = 'pyarrow')
+    print(f"Success! Saved {len(master_df)} rows to {parquet_filename}")
 
 else:
     print("No data was collected. Files were not saved.")
